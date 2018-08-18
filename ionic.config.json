@@ -1,0 +1,8 @@
+{
+  "name": "neverapp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "pro_id": "a89f107a"
+}
