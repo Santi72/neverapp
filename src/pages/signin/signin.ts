@@ -15,9 +15,12 @@ export class SigninPage {
   }
 
   signIn() {
+    console.log('signIn');
   }
 
   signUp() {
+    console.log('signUp');
+
     this.navCtrl.push(SignupPage);
   }
 
