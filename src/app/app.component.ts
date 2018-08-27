@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AuthProvider } from '../providers/auth/auth';
 
-//import { HomePage } from '../pages/home/home';
 import { SigninPage } from '../pages/signin/signin';
 import { HomePage } from '../pages/home/home';
 
