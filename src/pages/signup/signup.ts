@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
 import { UserModel } from '../../models/user-model';
 import { AuthProvider } from '../../providers/auth/auth';
 import { SigninPage } from '../signin/signin';
@@ -26,7 +26,7 @@ export class SignupPage {
 
   signUp(){
     let loading = this.loadingCtrl.create({
-      content: 'Creando cuenta, por favor esper...'
+      content: 'Creando cuenta, por favor espere...'
     });
 
     loading.present();

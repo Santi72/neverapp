@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
+
 
 import { SignupPage } from '../signup/signup';
+import { UserModel } from '../../models/user-model';
+
+import { AuthProvider } from '../../providers/auth/auth';
+import { HomePage } from '../home/home';
 
 
 @IonicPage()
@@ -11,17 +16,45 @@ import { SignupPage } from '../signup/signup';
 })
 export class SigninPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  userModel: UserModel;
+
+  constructor(public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    public authService: AuthProvider)  {
+    this.userModel = new UserModel(); 
   }
 
   signIn() {
-    console.log('signIn');
+    let loading = this.loadingCtrl.create({
+      content: 'Iniciando sesión. Por favor, espere...'
+    });
+    loading.present();
+
+    this.authService.LogarseConEmailPassword(this.userModel).then(result => {
+      loading.dismiss();
+
+      this.navCtrl.setRoot(HomePage);
+      
+    }).catch(error => {
+      loading.dismiss();
+
+      console.log(error);
+      this.alert('Error', 'Ha ocurrido un error inesperado. Por favor intente nuevamente.');
+    });
   }
 
   signUp() {
-    console.log('signUp');
-
     this.navCtrl.push(SignupPage);
+  }
+
+  alert(title: string, message: string) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: message,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }
