@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { User } from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserModel } from '../../models/user-model';
-import { retry } from 'rxjs/operators';
 
 
 @Injectable()
