@@ -1,0 +1,1 @@
+export { ProductoPage } from './producto/producto';

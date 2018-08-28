@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { User } from 'firebase';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import { UserModel } from '../../models/user-model';
 
 
@@ -34,5 +34,7 @@ export class AuthProvider {
   signOut(): Promise<any>{
     return this.angularFireAuth.auth.signOut();
   }
+
+  
 
 }

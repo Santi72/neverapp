@@ -40,7 +40,7 @@ export class SigninPage {
       loading.dismiss();
 
       console.log(error);
-      this.alert('Error', 'Ha ocurrido un error inesperado. Por favor intente nuevamente.');
+      this.alert('Info', 'Ha ocurrido un error o aún no se ha logado. Por favor intente nuevamente o registrese.');
     });
   }
 
