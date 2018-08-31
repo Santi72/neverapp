@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
-
+import { IonicPage, NavController, LoadingController, AlertController, NavParams } from 'ionic-angular';
 
 import { SignupPage } from '../signup/signup';
+import { HomePage } from '../home/home';
+
 import { UserModel } from '../../models/user-model';
 
 import { AuthProvider } from '../../providers/auth/auth';
-import { HomePage } from '../home/home';
+
 
 
 @IonicPage()
@@ -19,6 +20,7 @@ export class SigninPage {
   userModel: UserModel;
 
   constructor(public navCtrl: NavController,
+    public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public authService: AuthProvider)  {
@@ -32,9 +34,10 @@ export class SigninPage {
     loading.present();
 
     this.authService.LogarseConEmailPassword(this.userModel).then(result => {
+     
       loading.dismiss();
 
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(HomePage, { 'email': this.userModel.email } );
       
     }).catch(error => {
       loading.dismiss();

@@ -16,10 +16,37 @@
 
 <ion-content padding>
   <p>
-    Bienvenido a NeverApp modificado.
+    Bienvenido a NeverApp.
   </p>
+  <br>
+  <form (ngSubmit)="guardar()"  #forma="ngForm">
+
+    <div class="form-group">
+      <label>Nombre de lista</label>
+    <!--   <input [(ngModel)]="lista.nombre"
+          type="text" name="nombre" 
+          class="form-control"
+          placeholder="Nombre"
+          required> -->
+
+    </div>
+  
+ 
+
+    <div class="form-group">
+      <button [disabled]="!forma.valid"
+            type="submit" class="btn btn-outline-primary">
+        Crear Lista
+      </button>
+    </div>
+
+  </form>
+
   <button ion-button block 
      (click)="navegarProducto()" >
     Producto
   </button>
+
+  {{ forma.valid }}
+
 </ion-content>

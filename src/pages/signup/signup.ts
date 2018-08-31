@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
 import { UserModel } from '../../models/user-model';
 import { AuthProvider } from '../../providers/auth/auth';
+import { ListaProvider } from '../../providers/lista/lista';
+
 import { SigninPage } from '../signin/signin';
-
-
 
 @IonicPage()
 @Component({
@@ -15,12 +15,13 @@ export class SignupPage {
 
   userModel: UserModel;
 
-  constructor(public navCtrl: NavController,
+  constructor(private listaprov: ListaProvider,
+              public navCtrl: NavController,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
               public authProvider: AuthProvider) {
 
-                this.userModel = new UserModel();
+              this.userModel = new UserModel();
 
   }
 
@@ -32,6 +33,12 @@ export class SignupPage {
     loading.present();
 
     this.authProvider.CrearUsuarioConEmailAndPassword(this.userModel).then( result =>{
+
+      this.listaprov.nuevaLista(this.userModel.email, this.userModel.password)
+        .subscribe(data => {
+
+        });
+
       loading.dismiss();
 
       this.navCtrl.push(SigninPage);

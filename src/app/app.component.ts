@@ -20,9 +20,10 @@ export class MyApp {
               authProvider: AuthProvider) {
 
     if (authProvider.authenticated) {
-      this.rootPage = SigninPage;
-    } else {
       this.rootPage = HomePage;
+    } else {     
+      this.rootPage = SigninPage;
+      this.rootPage = HomePage; // PROVISIONAL para entrar directo
     }
 
     platform.ready().then(() => {
