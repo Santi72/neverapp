@@ -17,10 +17,8 @@ export class HomePage {
               public navParams: NavParams,
               public authProvider: AuthProvider) {
      
-    if (authProvider.authenticated) {
-      console.log(authProvider.user.email);
-      console.log(authProvider.user.emailVerified );
-    }
+    console.log(navParams.get('email'));
+    console.log(navParams.get('pass'));
   }
 
   signOut(){
@@ -28,8 +26,14 @@ export class HomePage {
     this.navCtrl.setRoot(SigninPage);
   }
 
-  navegarProducto(){
-    this.navCtrl.push( this.paginaProducto);
+ 
+
+  apuntarProducto(){
+    this.navCtrl.push(this.paginaProducto);
+  }
+
+  tacharProducto(){
+    console.log("Tachar el producto (echar al carrito)")
   }
 
 

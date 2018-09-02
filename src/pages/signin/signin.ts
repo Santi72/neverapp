@@ -37,7 +37,7 @@ export class SigninPage {
      
       loading.dismiss();
 
-      this.navCtrl.setRoot(HomePage, { 'email': this.userModel.email } );
+      this.navCtrl.setRoot(HomePage, { 'email': this.userModel.email, 'pass': this.userModel.password } );
       
     }).catch(error => {
       loading.dismiss();

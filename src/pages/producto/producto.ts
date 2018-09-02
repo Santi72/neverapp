@@ -17,4 +17,8 @@ export class ProductoPage {
     console.log('ionViewDidLoad ProductoPage');
   }
 
+  nuevoProducto(){
+
+  }
+
 }

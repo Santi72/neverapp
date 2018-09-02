@@ -14,39 +14,25 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <p>
-    Bienvenido a NeverApp.
-  </p>
-  <br>
-  <form (ngSubmit)="guardar()"  #forma="ngForm">
+<ion-content padding text-center>
+<button ion-button
+    (click)=apuntarProducto()>
+    Apuntar producto
+</button>
 
-    <div class="form-group">
-      <label>Nombre de lista</label>
-    <!--   <input [(ngModel)]="lista.nombre"
-          type="text" name="nombre" 
-          class="form-control"
-          placeholder="Nombre"
-          required> -->
 
-    </div>
-  
- 
+<ion-list>
+  <button ion-item  (click)="tacharProducto()">
 
-    <div class="form-group">
-      <button [disabled]="!forma.valid"
-            type="submit" class="btn btn-outline-primary">
-        Crear Lista
-      </button>
-    </div>
-
-  </form>
-
-  <button ion-button block 
-     (click)="navegarProducto()" >
-    Producto
+    <h3>Nombre</h3>    
+    <h4>Marca</h4>
+    <h4>Cantidad</h4>
+    
   </button>
+</ion-list>
 
-  {{ forma.valid }}
+
+
+  
 
 </ion-content>

@@ -22,8 +22,8 @@ export class MyApp {
     if (authProvider.authenticated) {
       this.rootPage = HomePage;
     } else {     
-      this.rootPage = SigninPage;
-      this.rootPage = HomePage; // PROVISIONAL para entrar directo
+      this.rootPage = HomePage;
+ // Prov =SigninPage
     }
 
     platform.ready().then(() => {

@@ -5,6 +5,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { ListaProvider } from '../../providers/lista/lista';
 
 import { SigninPage } from '../signin/signin';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -37,11 +38,10 @@ export class SignupPage {
       this.listaprov.nuevaLista(this.userModel.email, this.userModel.password)
         .subscribe(data => {
 
-        });
-
+        });      
       loading.dismiss();
 
-      this.navCtrl.push(SigninPage);
+      this.navCtrl.push(HomePage, { 'email': this.userModel.email, 'pass': this.userModel.password });
 
     }).catch( error => {
       loading.dismiss();
@@ -50,7 +50,6 @@ export class SignupPage {
       this.alert('Error', 'Error inesperado. Intentelo de nuevo');
     })
   }
-
   
   alert(title: string, message: string){
     let alert = this.alertCtrl.create({
