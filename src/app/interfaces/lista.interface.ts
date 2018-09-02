@@ -1,6 +1,6 @@
 
 
 export interface Lista{
-    nombre:string;
+    nombre:string;  
     key$?:string;
 }

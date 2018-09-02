@@ -11,25 +11,29 @@ import { ProductoPage } from '../index.paginas';
 })
 export class HomePage {
 
-  paginaProducto:any = ProductoPage;
+  email: string;
+  pass: string;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public authProvider: AuthProvider) {
-     
-    console.log(navParams.get('email'));
-    console.log(navParams.get('pass'));
+              public authProvider: AuthProvider,
+              ) {
+
+    this.email = navParams.get('email');
+    this.pass = navParams.get('pass');  
+
+    console.log("Home mail :: "+this.email);
+    console.log("Homa pass :: "+this.pass);
+         
   }
 
   signOut(){
     this.authProvider.signOut();
     this.navCtrl.setRoot(SigninPage);
-  }
-
- 
+  } 
 
   apuntarProducto(){
-    this.navCtrl.push(this.paginaProducto);
+    this.navCtrl.push(ProductoPage, { 'email': this.email, 'pass': this.pass });
   }
 
   tacharProducto(){
