@@ -41,6 +41,8 @@ export class ListaProvider {
     this.lc_email = email.substring(0, 3);
     this.lc_pass = pass.substring(0, 3);
 
+    console.log(productoModel);
+
     this.listaURL = "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_email + this.lc_pass + ".json"
 
     let body = JSON.stringify( productoModel );

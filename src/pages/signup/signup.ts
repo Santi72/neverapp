@@ -28,8 +28,6 @@ export class SignupPage {
               public authProvider: AuthProvider) {
 
               this.userModel = new UserModel();
-              //this.productoModel = new ProductoModel();
-
   }
 
   signUp(){

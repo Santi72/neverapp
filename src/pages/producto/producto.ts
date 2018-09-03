@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListaProvider } from '../../providers/lista/lista';
 import { ProductoModel } from '../../models/producto-model';
 
+import { NgForm } from "@angular/forms";
+
 @IonicPage()
 @Component({
   selector: 'page-producto',
@@ -14,9 +16,9 @@ export class ProductoPage {
   pass:string;
  
   producto: ProductoModel = {
-    nombre: 'yogurt',
-    marca: 'danone',
-    cantidad: 6
+    nombre: '',
+    marca: '',
+    cantidad: 1
   }
  
   constructor(private listaprov: ListaProvider,
@@ -32,8 +34,8 @@ export class ProductoPage {
   }
  
   nuevoProducto(){
-  this.listaprov.nuevoProducto(this.email, this.pass, this.producto)
-    .subscribe(data => {
+    this.listaprov.nuevoProducto(this.email, this.pass, this.producto)
+      .subscribe(data => {
 
     });
 
