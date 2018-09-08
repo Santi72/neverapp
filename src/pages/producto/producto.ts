@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListaProvider } from '../../providers/lista/lista';
 import { ProductoModel } from '../../models/producto-model';
 
-import { NgForm } from "@angular/forms";
 
 @IonicPage()
 @Component({
@@ -23,18 +22,19 @@ export class ProductoPage {
  
   constructor(private listaprov: ListaProvider,
             public navCtrl: NavController,
-            public navParams: NavParams
+            public navParams: NavParams,
+            public listaProv: ListaProvider
             ) {
 
-            this.email=navParams.get('email');           
-            this.pass=navParams.get('pass');
-
-    console.log("Producto Page :: "+this.email);
-    console.log("Producto Page :: "+this.pass);
   }
  
   nuevoProducto(){
-    this.listaprov.nuevoProducto(this.email, this.pass, this.producto)
+
+    this.listaProv.cargarStorage();
+
+    console.log("nuevoProducto:: " + JSON.stringify(this.listaProv.userModel));
+
+    this.listaprov.nuevoProducto(this.listaProv.userModel, this.producto)
       .subscribe(data => {
 
     });

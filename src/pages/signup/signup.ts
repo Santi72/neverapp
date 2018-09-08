@@ -42,8 +42,9 @@ export class SignupPage {
 
       this.listaprov.nuevaLista(this.userModel.email, this.userModel.password) 
         .subscribe(data => {
+          
         }); 
-        
+      this.listaprov.guardarStorage(this.userModel);  
      
       loading.dismiss();
 

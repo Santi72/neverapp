@@ -7,6 +7,7 @@ import { HomePage } from '../home/home';
 import { UserModel } from '../../models/user-model';
 
 import { AuthProvider } from '../../providers/auth/auth';
+import { ListaProvider } from '../../providers/lista/lista';
 
 
 
@@ -18,12 +19,15 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class SigninPage {
 
   userModel: UserModel;
+  
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public authService: AuthProvider)  {
+    public authService: AuthProvider,
+    public listaProv: ListaProvider)  {
+
     this.userModel = new UserModel(); 
   }
 
@@ -34,6 +38,8 @@ export class SigninPage {
     loading.present();
 
     this.authService.LogarseConEmailPassword(this.userModel).then(result => {
+      
+      this.listaProv.guardarStorage(this.userModel);
      
       loading.dismiss();
 
@@ -59,5 +65,6 @@ export class SigninPage {
     });
     alert.present();
   }
+
 
 }
