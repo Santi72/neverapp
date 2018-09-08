@@ -40,7 +40,7 @@ export class SignupPage {
 
     this.authProvider.CrearUsuarioConEmailAndPassword(this.userModel).then( result =>{
 
-      this.listaprov.nuevaLista(this.userModel.email, this.userModel.password) 
+      this.listaprov.nuevaLista(this.userModel) 
         .subscribe(data => {
           
         }); 
@@ -48,7 +48,7 @@ export class SignupPage {
      
       loading.dismiss();
 
-      this.navCtrl.push(HomePage, { 'email': this.userModel.email, 'pass': this.userModel.password } );
+      this.navCtrl.push(HomePage);
 
     }).catch( error => {
       loading.dismiss();

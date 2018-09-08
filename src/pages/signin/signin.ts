@@ -40,10 +40,11 @@ export class SigninPage {
     this.authService.LogarseConEmailPassword(this.userModel).then(result => {
       
       this.listaProv.guardarStorage(this.userModel);
+      console.log("INICIO - SE HA LOGADO:: " + JSON.stringify(this.userModel) )
      
       loading.dismiss();
 
-      this.navCtrl.setRoot(HomePage, { 'email': this.userModel.email, 'pass': this.userModel.password } );
+      this.navCtrl.setRoot(HomePage);
       
     }).catch(error => {
       loading.dismiss();

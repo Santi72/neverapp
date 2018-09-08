@@ -7,13 +7,12 @@ import { ProductoModel } from '../../models/producto-model';
 import { UserModel } from '../../models/user-model';
 
 import { Platform } from "ionic-angular";
-import { User } from 'firebase';
 
 @Injectable()
 export class ListaProvider {
 
-  lc_email: string;
-  lc_pass: string;
+  lc_email: string = "";
+  lc_pass: string = "";
   listaURL: string = "";
 
   userModel :UserModel;  
@@ -23,14 +22,15 @@ export class ListaProvider {
                 private storage: Storage) { }
 
 
-  nuevaLista( email: string, pass: string ){
+  nuevaLista( userModel: UserModel ){
 
-    this.lc_email = email.substring(0, 3);
-    this.lc_pass = pass.substring(0, 3);
-
+    if (userModel) {
+      this.lc_email = userModel.email.substring(0, 3);
+      this.lc_pass = userModel.password.substring(0, 3);
+    }
     this.listaURL = "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_email + this.lc_pass + ".json"
 
-    let body = JSON.stringify( email );    
+    let body = JSON.stringify(userModel.email );    
     console.log(body);
     let headers = new Headers({
        'Content-type':'application/json' 
@@ -44,7 +44,31 @@ export class ListaProvider {
 
   }
 
+  nuevoProducto(userModel: UserModel, productoModel: ProductoModel) {
+
+    if (userModel) {
+      this.lc_email = userModel.email.substring(0, 3);
+      this.lc_pass = userModel.password.substring(0, 3);
+    }
+
+    this.listaURL = "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_email + this.lc_pass + ".json"
+
+    let body = JSON.stringify(productoModel);
+
+    let headers = new Headers({
+      'Content-type': 'application/json'
+    });
+
+    return this.http.post(this.listaURL, body, { headers })
+            .map(res => {
+              console.log(res.json());
+              return res.json();
+            })
+
+  }
+
   guardarStorage(userModel: UserModel) {
+
 
     if (this.platForm.is("cordova")) {
       //Dispositivo
@@ -56,7 +80,6 @@ export class ListaProvider {
 
     } else {
       //Escritorio
-      console.log("Escritorio -Guardar Storage JSON:: " + JSON.stringify(userModel));
       localStorage.setItem("nomlista", JSON.stringify(userModel));
     }
 
@@ -90,7 +113,6 @@ export class ListaProvider {
         console.log("Escritorio");
         if (localStorage.getItem("nomlista")) {
           this.userModel = JSON.parse(localStorage.getItem("nomlista"));
-          console.log(this.userModel);
         }
 
         resolve();
@@ -101,36 +123,8 @@ export class ListaProvider {
 
     return promesa;   
 
-
-
   }
 
-
-
-
-  nuevoProducto(userModel: UserModel, productoModel: ProductoModel ){
-
-    this.lc_email = userModel.email.substring(0, 3);
-    this.lc_pass = userModel.password.substring(0, 3);
-
-    console.log(productoModel);
-
-    this.listaURL = "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_email + this.lc_pass + ".json"
-
-    let body = JSON.stringify( productoModel );
-    
-    console.log("Paso en el body :: "+body);
-    let headers = new Headers({
-      'Content-type': 'application/json'
-    });
-
-    return this.http.post(this.listaURL, body, { headers })
-      .map(res => {
-        console.log(res.json());
-        return res.json();
-      })
-
-  }
 
 
 
