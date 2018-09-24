@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-navbar>
 
+  <ion-navbar>
     <ion-title>
       NeverApp
     </ion-title> 
@@ -10,31 +10,32 @@
         <ion-icon name="log-out"></ion-icon>
       </button>
     </ion-buttons>
-
   </ion-navbar>
+  
 </ion-header>
 
 <ion-content padding text-center>
-<button ion-button
-    (click)=apuntarProducto()>
-    Apuntar producto
-</button>
 
 
-<ion-list>
-  <button ion-item  (click)="tacharProducto()">
+<ion-list> 
 
-    <h3>Nombre</h3>    
-    <h4>Marca</h4>
-    <h4>Cantidad</h4>
-    
-  </button>
+      <button ion-item 
+        *ngFor="let k of productos | keys; let i = index"
+        (click)="tacharProducto(productos[k].tachado,k)">
+      
+        <h2>{{ productos[k].nombre }}</h2>       
+        <p>{{ productos[k].marca }}</p>
+        <p>{{ productos[k].tachado }}</p>
+      </button>  
+
 </ion-list>
 
+  <ion-fab bottom right>
+    <button (click)="apuntarProducto()" ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 
-
-
-
-  
+ 
 
 </ion-content>

@@ -18,8 +18,7 @@ import { ListaProvider } from '../../providers/lista/lista';
 })
 export class SigninPage {
 
-  userModel: UserModel;
-  
+  userModel: UserModel;  
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,

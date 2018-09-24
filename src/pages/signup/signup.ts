@@ -40,11 +40,13 @@ export class SignupPage {
 
     this.authProvider.CrearUsuarioConEmailAndPassword(this.userModel).then( result =>{
 
-      this.listaprov.nuevaLista(this.userModel) 
+      this.listaprov.nuevaLista() 
         .subscribe(data => {
           
         }); 
-      this.listaprov.guardarStorage(this.userModel);  
+
+      console.log("INICIO - SE HA REGISTRADO:: " + JSON.stringify(this.userModel)) 
+      this.listaprov.guardarStorage(this.userModel); 
      
       loading.dismiss();
 

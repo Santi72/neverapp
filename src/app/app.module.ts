@@ -21,6 +21,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthProvider } from '../providers/auth/auth';
 import { ListaProvider } from '../providers/lista/lista';
 
+import { KeysPipe } from '../pipes/keys/keys';
+
 //Plugins
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -40,7 +42,8 @@ export const firebaseConfig = {
     HomePage,
     SignupPage,
     SigninPage,
-    ProductoPage    
+    ProductoPage,
+    KeysPipe    
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     HttpModule,
     IonicStorageModule.forRoot()
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -8,16 +8,22 @@ import { AuthProvider } from '../providers/auth/auth';
 import { SigninPage } from '../pages/signin/signin';
 import { HomePage } from '../pages/home/home';
 
+import { Observable } from "rxjs/Observable";
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any = SigninPage;
 
+  public items: Observable<any[]>;
+
   constructor(platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
-              authProvider: AuthProvider) {
+              authProvider: AuthProvider,
+              ) {
+
 
     if (authProvider.authenticated) {
       this.rootPage = HomePage;
@@ -32,6 +38,8 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
+
   }
 }
 

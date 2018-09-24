@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListaProvider } from '../../providers/lista/lista';
 import { ProductoModel } from '../../models/producto-model';
-import { UserModel } from '../../models/user-model';
 
 
 @IonicPage()
@@ -15,15 +14,14 @@ export class ProductoPage {
  
   producto: ProductoModel = {
     nombre: '',
-    marca: '',
-    cantidad: 1
+    marca: '',   
+    cantidad: 1,
+    tachado: false
   }
  
-  constructor(private listaprov: ListaProvider,
-            public navCtrl: NavController,
+  constructor(public navCtrl: NavController,
             public navParams: NavParams,
             public listaProv: ListaProvider,
-            private loadingCtrl: LoadingController
             ) {
 
   }
@@ -31,9 +29,9 @@ export class ProductoPage {
   nuevoProducto(){
 
     this.listaProv.cargarStorage().then( () =>{     
-      this.listaprov.nuevoProducto(this.listaprov.userModel, this.producto)
+      this.listaProv.nuevoProducto( this.producto)
         .subscribe(data => {
-
+          this.navCtrl.pop();
         });
 
 
