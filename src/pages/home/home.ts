@@ -10,7 +10,7 @@ import { ProductoModel } from '../../models/producto-model';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html'  
 })
 export class HomePage {
 

@@ -20,13 +20,27 @@
 <ion-list> 
 
       <button ion-item 
-        *ngFor="let k of productos | keys; let i = index"
+        *ngFor="let k of productos | keys ; let i = index"
         (click)="tacharProducto(productos[k].tachado,k)">
+
+        <p *ngIf="productos[k].tachado; then thenTemplate; else elseTemplate"></p>
+        <ng-template #thenTemplate>
+            <del><h2><p text-right>{{productos[k].nombre}}</p></h2></del>
+            <del><p text-right>{{productos[k].marca | uppercase}}</p></del>
+            <p text-right>En el carrito</p>
+        </ng-template>
+
+        <ng-template #elseTemplate>
+            <h2><p>{{productos[k].nombre}}</p></h2>
+            <p>{{ productos[k].marca | uppercase }}</p>
+            <p>{{ productos[k].cantidad }}</p>
+        </ng-template>   
       
-        <h2>{{ productos[k].nombre }}</h2>       
-        <p>{{ productos[k].marca }}</p>
-        <p>{{ productos[k].tachado }}</p>
-      </button>  
+   
+      </button> 
+      
+    <!--   <div *ngIf="show; else elseBlock">Text to show</div>
+      <ng-template #elseBlock>Alternate text while primary text is hidden</ng-template> -->
 
 </ion-list>
 

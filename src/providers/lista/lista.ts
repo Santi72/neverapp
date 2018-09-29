@@ -77,7 +77,7 @@ export class ListaProvider {
       'Content-type': 'application/json'
     });
 
-    return this.http.post(listaURL, body, { headers })
+    return this.http.post(listaURL , body, { headers })
             .map(res => {
               console.log(res.json());
               return res.json();
@@ -112,7 +112,10 @@ export class ListaProvider {
     
     let listaURL = this.listadoURL(userModel);
 
-    return this.http.get( listaURL )
+    let url = `${ listaURL }?orderByValue()`
+    console.log(url)
+
+    return this.http.get(url)
             .map( res =>  res.json() ); 
   }
 
