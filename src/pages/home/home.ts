@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { SigninPage } from '../signin/signin';
 import { ProductoPage } from '../index.paginas';
@@ -21,20 +21,31 @@ export class HomePage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public authProvider: AuthProvider,
-              public listaProv: ListaProvider
+              public listaProv: ListaProvider,
+              private menuCtrl: MenuController
               ) {
          
         console.log("Home constructor");
+
+
             
   }
 
   ionViewWillEnter(){
  
     this.verLista();
+    
   }
+
+  mostrarMenu(){
+    this.menuCtrl.toggle();
+  }
+
+
 
   verLista(){
     console.log("verLista");
+    
 
     this.listaProv.cargarStorage().then(() => {
       this.listaProv.getListado(this.listaProv.userModel)
@@ -44,6 +55,8 @@ export class HomePage {
 
         });
     });
+
+    this.menuCtrl.close();
 
   }
 

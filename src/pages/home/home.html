@@ -1,18 +1,49 @@
+
 <ion-header>
+     <ion-navbar>
 
-  <ion-navbar>
-    <ion-title>
-      NeverApp
-    </ion-title> 
+      <ion-title>
+        NeverApp
+      </ion-title>
 
-    <ion-buttons end>
-      <button ion-button icon-only (click)="signOut()">
-        <ion-icon name="log-out"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-  
+      <ion-buttons left>
+        <button ion-button icon-only (click)="mostrarMenu()">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>        
+
+    </ion-navbar>
+
 </ion-header>
+
+
+<ion-menu [content]="content" type="overlay">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>  
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="verLista()">
+        Actualizar Lista
+      </button>
+      <button ion-item (click)="limpiarLista()">
+        Limpiar Lista
+      </button>
+      <button ion-item (click)="signOut()">
+        Cerrar Sesión
+      </button>
+
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>
+
 
 <ion-content padding text-center>
 
@@ -37,10 +68,8 @@
         </ng-template>   
       
    
-      </button> 
-      
-    <!--   <div *ngIf="show; else elseBlock">Text to show</div>
-      <ng-template #elseBlock>Alternate text while primary text is hidden</ng-template> -->
+      </button>       
+   
 
 </ion-list>
 
@@ -53,3 +82,5 @@
  
 
 </ion-content>
+
+

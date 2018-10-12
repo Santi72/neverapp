@@ -17,7 +17,7 @@ export class ListaProvider {
   lc_pass: string = "";
 
   userModel :UserModel; 
-  
+  productoModel: ProductoModel; 
   
 
   public productosLista: any[] = [];
@@ -27,8 +27,6 @@ export class ListaProvider {
                 private storage: Storage
                
                 ) { }
-
-
 
 
   listadoURL(userModel: UserModel){
@@ -112,7 +110,9 @@ export class ListaProvider {
     
     let listaURL = this.listadoURL(userModel);
 
-    let url = `${ listaURL }?orderByValue()`
+   
+    let url = `${listaURL}?orderByValue()`
+    // Pruebas de Ordenacion Pendientes // url = `https://neverapp-c21a5.firebaseio.com/LCsansan.json?orderBy="marca"&limitToFirst=3`
     console.log(url)
 
     return this.http.get(url)
