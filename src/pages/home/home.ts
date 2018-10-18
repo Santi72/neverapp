@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, AlertController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { SigninPage } from '../signin/signin';
 import { ProductoPage } from '../index.paginas';
 import { ListaProvider } from '../../providers/lista/lista';
 import { UserModel } from '../../models/user-model';
 import { ProductoModel } from '../../models/producto-model';
+import { get } from '@ionic-native/core';
 
 
 @Component({
@@ -16,24 +17,23 @@ export class HomePage {
 
   userModelVacio: UserModel;  
   productos: ProductoModel;
+  loading: boolean = true;
 
  
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public authProvider: AuthProvider,
               public listaProv: ListaProvider,
-              private menuCtrl: MenuController
+              private menuCtrl: MenuController,
+              private alertCtrl: AlertController
               ) {
-         
-        console.log("Home constructor");
-
+    
 
             
   }
 
   ionViewWillEnter(){
- 
-    this.verLista();
+    this.verLista();  
     
   }
 
@@ -44,19 +44,24 @@ export class HomePage {
 
 
   verLista(){
-    console.log("verLista");
-    
-
+   
     this.listaProv.cargarStorage().then(() => {
-      this.listaProv.getListado(this.listaProv.userModel)
+      this.listaProv.getListado(this.listaProv.userModel)        
         .subscribe(data => {
-          console.log(data);
+          //console.log(data);
+
+          //setTimeout(() => {      // el loading es en caso de conexiones lentas. settimeOut para simularlo
+
           this.productos = data;
+          this.loading = false;
+
+          // }, 4000)  
 
         });
     });
 
     this.menuCtrl.close();
+
 
   }
 
@@ -74,19 +79,115 @@ export class HomePage {
   }
 
   tacharProducto(tachado: boolean,  k: string ){
-    console.log("Tachar el producto: (echar al carrito) " + k);
 
 
-     this.listaProv.cargarStorage().then(() => {
-      this.listaProv.actualizarProducto(tachado, k )
-        .subscribe(data => {
-          this.verLista();
-        }); 
+    if (!tachado) {
+      // Si no está tachado, Tacharle
+      console.log("Tachar el producto: (echar al carrito) " + k);
+      this.listaProv.cargarStorage().then(() => {
+        this.listaProv.actualizarProducto(tachado, k)
+          .subscribe(data => {
+            this.verLista();
+          });
+      }) 
+    }else{
+      // Preguntar si se quiere "destachar" o se quiere borrar definitivamente
+      
+        const confirm = this.alertCtrl.create({
+          title: 'Eliminación',
+          message: '¿Quieres borrar este producto o volver ponerlo en la lista?',
+          buttons: [
+            {
+              text: 'Borrarlo',
+              handler: () => {
+                console.log("Borrar el producto: (quitar de lista) " + k);
+                this.listaProv.cargarStorage().then(() => {
+                  this.listaProv.eliminarProducto(k)
+                    .subscribe(data => {
+                      //this.verLista();
+                      delete this.productos[k];  //En lugar de recargar otra vez la lista, borro del componente
+                    });
+                })               
+              }
+            },
+            {
+              text: 'Poner en lista',
+              handler: () => {
+                console.log("Tachar el producto: (echar al carrito) " + k);
+                this.listaProv.cargarStorage().then(() => {
+                  this.listaProv.actualizarProducto(tachado, k)
+                    .subscribe(data => {
+                      this.verLista();
+                    });
+                }) 
 
-    });  
+               
+              }
+            }
+          ]
+        });
+        confirm.present();
+        
+      }
 
 
   }
+
+  limpiarLista(){
+
+   
+    const confirm = this.alertCtrl.create({
+      title: 'Limpiar Lista',
+      message: '¿Quieres borrar los productos que ya están en el carrito?',
+      buttons: [
+        {
+          text: 'Borrarlos',
+          handler: () => {
+            console.log("Borrar todos los productos tachados" ); 
+            
+            
+            this.listaProv.cargarStorage().then(() => {
+              this.listaProv.getListado(this.listaProv.userModel)
+                .subscribe(data => {
+   
+                  this.productos = data;
+
+                  for (let key in this.productos) {                  
+
+                      console.log("Clave:: " + key);
+
+                      console.log(this.productos[key].tachado);
+
+                        if (this.productos[key].tachado){
+                          this.listaProv.eliminarProducto(key)
+                                  .subscribe(data => {
+                                    this.verLista();
+                                  })
+
+                        }                   
+                      }               
+
+                  });
+            })                   
+           
+          }        
+        },
+        {
+          text: 'NO',
+          handler: () => {
+            console.log("No hacer nada");          
+
+          }
+        }
+      ]
+    });
+    confirm.present();
+
+    this.menuCtrl.close();
+  
+
+  }
+
 
 
 }

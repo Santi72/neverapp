@@ -31,7 +31,7 @@
         Actualizar Lista
       </button>
       <button ion-item (click)="limpiarLista()">
-        Limpiar Lista
+        Limpiar Lista        
       </button>
       <button ion-item (click)="signOut()">
         Cerrar Sesión
@@ -51,27 +51,48 @@
 <ion-list> 
 
       <button ion-item 
-        *ngFor="let k of productos | keys ; let i = index"
+        *ngFor="let k of productos | keys ; "
+        
         (click)="tacharProducto(productos[k].tachado,k)">
 
         <p *ngIf="productos[k].tachado; then thenTemplate; else elseTemplate"></p>
-        <ng-template #thenTemplate>
-            <del><h2><p text-right>{{productos[k].nombre}}</p></h2></del>
-            <del><p text-right>{{productos[k].marca | uppercase}}</p></del>
-            <p text-right>En el carrito</p>
+        <ng-template #thenTemplate>  
+            <p text-right>
+            <del><h2>{{productos[k].nombre}}</h2></del>                          
+            <del>{{productos[k].marca | uppercase}}</del>            
+            
+            <ion-note item-end>
+              En el carrito
+            </ion-note>
+            </p>
         </ng-template>
 
         <ng-template #elseTemplate>
-            <h2><p>{{productos[k].nombre}}</p></h2>
-            <p>{{ productos[k].marca | uppercase }}</p>
-            <p>{{ productos[k].cantidad }}</p>
-        </ng-template>   
-      
+            <h2>{{productos[k].nombre}}</h2>            
+            {{ productos[k].marca | uppercase }}
+            <ion-note item-end>
+              Cantidad: {{ productos[k].cantidad }}
+            </ion-note>  
+        </ng-template>  
+        
+         
    
-      </button>       
-   
+      </button>  
 
+      <div *ngIf="loading" 
+        class="alert alert-warning" role="alert">
+        <strong>Cargando tu lista</strong> por favor espera
+      </div>
+
+
+      <div *ngIf="(productos | keys).length === 0 && !loading"
+              class="alert alert-info" role="alert">
+              <strong>No hay productos</strong> añade el primero!
+      </div>
+    
+ 
 </ion-list>
+
 
   <ion-fab bottom right>
     <button (click)="apuntarProducto()" ion-fab>

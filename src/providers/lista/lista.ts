@@ -18,7 +18,8 @@ export class ListaProvider {
 
   userModel :UserModel; 
   productoModel: ProductoModel; 
-  
+
+ 
 
   public productosLista: any[] = [];
 
@@ -88,7 +89,7 @@ export class ListaProvider {
 
     let productoURL = this.productoURL(this.userModel);
 
-    let body = JSON.stringify(!tachado);
+    let body = JSON.stringify(!tachado);  // <- Lo contrario a lo que tenga
 
     let headers = new Headers({
       'Content-type': 'application/json'
@@ -105,6 +106,21 @@ export class ListaProvider {
       })
   }
 
+  eliminarProducto(key$:string){
+
+    let productoURL = this.productoURL(this.userModel);
+
+    let url = `${productoURL}/${key$}.json`
+
+    return this.http.delete( url )
+      .map ( res =>{
+        console.log(res.json());
+        return res.json();
+      })
+  }
+
+
+
   //FB GET Listado
   getListado(userModel: UserModel){
     
@@ -115,7 +131,7 @@ export class ListaProvider {
     // Pruebas de Ordenacion Pendientes // url = `https://neverapp-c21a5.firebaseio.com/LCsansan.json?orderBy="marca"&limitToFirst=3`
     console.log(url)
 
-    return this.http.get(url)
+    return this.http.get(url)      
             .map( res =>  res.json() ); 
   }
 

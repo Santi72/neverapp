@@ -6,4 +6,7 @@ export class ProductoModel {
     cantidad: number;
     tachado: boolean;
     key$?: string;
+
+
+
 }

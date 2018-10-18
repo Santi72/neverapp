@@ -8,6 +8,7 @@ import { ProductoModel } from '../../models/producto-model';
  */
 @Pipe({
   name: 'keys',
+  pure: false
 })
 export class KeysPipe implements PipeTransform {
 
