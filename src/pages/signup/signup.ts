@@ -10,6 +10,7 @@ import { ListaProvider } from '../../providers/lista/lista';
 import { SigninPage } from '../signin/signin';
 import { HomePage } from '../home/home';
 
+import { ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -24,8 +25,10 @@ export class SignupPage {
   constructor(private listaprov: ListaProvider,
               public navCtrl: NavController,
               public loadingCtrl: LoadingController,
+              public authService: AuthProvider,
               public alertCtrl: AlertController,
-              public authProvider: AuthProvider) {
+              public authProvider: AuthProvider,
+              private toastCtrl: ToastController) {
 
               this.userModel = new UserModel();
   }
@@ -33,24 +36,33 @@ export class SignupPage {
   signUp(){
 
     let loading = this.loadingCtrl.create({
-      content: 'Creando cuenta, por favor espere...'
+      content: 'Creando lista, por favor espera...'
     });
 
     loading.present();
 
     this.authProvider.CrearUsuarioConEmailAndPassword(this.userModel).then( result =>{
 
-      this.listaprov.nuevaLista() 
-        .subscribe(data => {
-          
-        }); 
+      this.userModel.uid = this.authService.UsuarioActual();
 
-      console.log("INICIO - SE HA REGISTRADO:: " + JSON.stringify(this.userModel)) 
+      console.log("signUp() - this.userModel.uid:: "+this.userModel.uid);
+
+      // No hace falta crear una lista al principio de logarse, ya tengo el uid
+      // al crear el primer Producto creo la lista
+
+/*       this.listaprov.nuevaLista(this.userModel) 
+        .subscribe(data => {
+
+        }); 
+ */
+      console.log("signUp() - SE HA REGISTRADO:: " + JSON.stringify(this.userModel)) 
       this.listaprov.guardarStorage(this.userModel); 
      
       loading.dismiss();
 
-      this.navCtrl.push(HomePage);
+      this.mostrarToastAlta("Se ha creado la lista correctamente");
+
+      this.navCtrl.setRoot(HomePage);
 
     }).catch( error => {
       loading.dismiss();
@@ -68,6 +80,15 @@ export class SignupPage {
     });
 
     alert.present();
+
+  }
+
+  mostrarToastAlta(message: string){
+      const toast = this.toastCtrl.create({
+        message: message,
+        duration: 2500
+      });
+      toast.present();    
 
   }
 

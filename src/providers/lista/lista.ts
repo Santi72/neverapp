@@ -15,6 +15,7 @@ export class ListaProvider {
 
   lc_email: string = "";
   lc_pass: string = "";
+  lc_uid: string = "";
 
   userModel :UserModel; 
   productoModel: ProductoModel; 
@@ -32,28 +33,39 @@ export class ListaProvider {
 
   listadoURL(userModel: UserModel){
     if (userModel) {
-      this.lc_email = userModel.email.substring(0, 3);
-      this.lc_pass = userModel.password.substring(0, 3);
+      //this.lc_email = userModel.email.substring(0, 3);
+      //this.lc_pass = userModel.password.substring(0, 3);
+      this.lc_uid = userModel.uid.substring(0, 4);
+      console.log("listadoURL() - this.lc_uid:: " + this.lc_uid);
+      
+      
     }
-    return "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_email + this.lc_pass + ".json";
+    //return "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_email + this.lc_pass + ".json";
+    return "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_uid + ".json";
+    
   }
 
   productoURL(userModel: UserModel) {
     if (userModel) {
-      this.lc_email = userModel.email.substring(0, 3);
-      this.lc_pass = userModel.password.substring(0, 3);
+      //this.lc_email = userModel.email.substring(0, 3);
+      //this.lc_pass = userModel.password.substring(0, 3);
+      this.lc_uid = userModel.uid.substring(0, 4);
+      console.log("productoURL() - this.lc_uid:: " + this.lc_uid);
     }
-    return "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_email + this.lc_pass+"/";
+    //return "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_email + this.lc_pass+"/";
+    return "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_uid + "/";
   }
 
 
 
   //FireBase POST Lista
-  nuevaLista( ){
+  nuevaLista( userModel: UserModel ){
 
-    let listaURL = this.listadoURL(this.userModel);
+    let listaURL = this.listadoURL(userModel);
 
-    let body = JSON.stringify(this.userModel.email );    
+    console.log("nuevaLista() - listaURL:: " + listaURL);
+
+    let body = JSON.stringify(userModel.email );    
     console.log(body);
     let headers = new Headers({
        'Content-type':'application/json' 
@@ -148,6 +160,7 @@ export class ListaProvider {
     } else {
       //Escritorio
       localStorage.setItem("nomlista", JSON.stringify(userModel));
+      console.log("Escritorio -Guardar Storage:: " + userModel);
     }
 
   }

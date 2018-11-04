@@ -1,10 +1,14 @@
-<ion-header>
-  <ion-navbar hideBackButton="true">
-    <ion-title>Iniciar Sesión</ion-title>
+<ion-header class="na_parrafos-font">
+  <ion-navbar color="primary" hideBackButton="true">
+    <ion-title>¡Bienvenido! Accede a tu lista</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="na_parrafos-font">
+<br>
+<img class="centrado" src="assets/imgs/LogoNombrePeq.png" >
+
+
   <form #signInForm="ngForm" (submit)="signIn()">
     <ion-list>
       <ion-item>
@@ -19,11 +23,11 @@
       </ion-item>
 
       <div padding-left padding-right padding-top>
-        <button ion-button [disabled]="!signInForm.form.valid" block>Entrar</button>
+        <button ion-button [disabled]="!signInForm.form.valid" block round>Entrar</button>
       </div>
 
       <div padding-left padding-right>
-        <p>&iquest;No tiene Cuenta de Usuario? <a (click)="signUp()">Regístrese</a>
+        <p>&iquest;Aún no tienes una lista de compra? <a (click)="signUp()">¡Crea una!</a>
       </div>
     </ion-list>
   </form>

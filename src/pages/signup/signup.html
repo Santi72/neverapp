@@ -1,10 +1,10 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Registrarse</ion-title>
+<ion-header class="na_parrafos-font">
+  <ion-navbar color="primary">
+    <ion-title>Registra una lista de compra</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="na_parrafos-font">
   <form #signUpForm="ngForm" (submit)="signUp()">
     <ion-list>
       <ion-item>
@@ -19,7 +19,7 @@
       </ion-item>
 
       <div padding-left padding-right padding-top>
-        <button ion-button [disabled]="!signUpForm.form.valid" block>Registrarse</button>
+        <button ion-button [disabled]="!signUpForm.form.valid" block round>Registrar</button>
       </div>
     </ion-list>
   </form>

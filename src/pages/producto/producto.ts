@@ -13,10 +13,12 @@ export class ProductoPage {
 
  
   producto: ProductoModel = {
-    nombre: '',
+    nombre: '',    
     marca: '',   
     cantidad: 1,
     tachado: false
+    //,
+    //variedad: ''
   }
  
   constructor(public navCtrl: NavController,

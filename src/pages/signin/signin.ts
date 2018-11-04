@@ -9,6 +9,7 @@ import { UserModel } from '../../models/user-model';
 import { AuthProvider } from '../../providers/auth/auth';
 import { ListaProvider } from '../../providers/lista/lista';
 
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @IonicPage()
@@ -19,13 +20,15 @@ import { ListaProvider } from '../../providers/lista/lista';
 export class SigninPage {
 
   userModel: UserModel;  
+  uid: string;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public authService: AuthProvider,
-    public listaProv: ListaProvider)  {
+    public listaProv: ListaProvider,
+    public angularFireAuth: AngularFireAuth)  {
 
     this.userModel = new UserModel(); 
   }
@@ -37,10 +40,15 @@ export class SigninPage {
     loading.present();
 
     this.authService.LogarseConEmailPassword(this.userModel).then(result => {
-      
+
+      console.log("1 INICIO - SE HA LOGADO:: " + JSON.stringify(this.userModel))
+
+      this.userModel.uid = this.authService.UsuarioActual();
+
       this.listaProv.guardarStorage(this.userModel);
-      console.log("INICIO - SE HA LOGADO:: " + JSON.stringify(this.userModel) )
-     
+
+      console.log("2 INICIO - SE HA GUARDADO:: " + JSON.stringify(this.userModel) )
+
       loading.dismiss();
 
       this.navCtrl.setRoot(HomePage);

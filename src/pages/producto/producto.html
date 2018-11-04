@@ -1,18 +1,17 @@
 
 
-<ion-header>
+<ion-header class="na_parrafos-font">
 
-  <ion-navbar>
-    <ion-title>Producto</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Nuevo Producto</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="na_parrafos-font" padding>
 
   <form (ngSubmit)="nuevoProducto()" #forma="ngForm">
-
   <ion-list>    
   
     <ion-item>
@@ -23,6 +22,15 @@
           required>
       </ion-input>
     </ion-item>
+
+    
+    <!-- <ion-item>
+      <ion-input [(ngModel)]="producto.variedad" 
+          name="variedad" 
+          type="text" 
+          placeholder="Variedad">
+      </ion-input>
+    </ion-item> -->
   
     <ion-item>
       <ion-input [(ngModel)]="producto.marca"
@@ -41,17 +49,13 @@
     </ion-item>
   
   </ion-list>
-
   </form>
 
-    <ion-content padding text-center>
+     <ion-content padding text-center>
       <button [disabled]="!forma.valid"
-          ion-button (click)=nuevoProducto()>
-        Apunta
+          ion-button (click)=nuevoProducto() round>
+        Poner en lista
       </button>
-    </ion-content>
-
-    
-
+    </ion-content> 
 
 </ion-content>

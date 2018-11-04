@@ -1,24 +1,20 @@
 
-<ion-header>
-     <ion-navbar>
-
+<ion-header class="na_parrafos-font">
+    <ion-navbar color="primary">
       <ion-title>
-        NeverApp
+        NEVERApp
       </ion-title>
 
       <ion-buttons left>
         <button ion-button icon-only (click)="mostrarMenu()">
           <ion-icon name="menu"></ion-icon>
         </button>
-      </ion-buttons>        
-
+      </ion-buttons>
     </ion-navbar>
-
 </ion-header>
 
 
-<ion-menu [content]="content" type="overlay">
-
+<ion-menu class="na_parrafos-font" [content]="content" type="overlay">
   <ion-header>
     <ion-toolbar>
       <ion-title>Menú</ion-title>
@@ -33,74 +29,66 @@
       <button ion-item (click)="limpiarLista()">
         Limpiar Lista        
       </button>
-      <button ion-item (click)="signOut()">
-        Cerrar Sesión
+      <button ion-item color=primary (click)="signOut()">
+        Cerrar Lista (sesión)
       </button>
-
     </ion-list>
   </ion-content>
-
 </ion-menu>
 
 <ion-nav id="nav" #content [root]="rootPage"></ion-nav>
 
 
-<ion-content padding text-center>
-
-
-<ion-list> 
-
-      <button ion-item 
-        *ngFor="let k of productos | keys ; "
+<ion-content class="na_parrafos-font" text-center>
+  <ion-list > 
         
-        (click)="tacharProducto(productos[k].tachado,k)">
+        <button ion-item 
+          *ngFor="let k of productos | keys ; "          
+          (click)="tacharProducto(productos[k].tachado,k)">
 
-        <p *ngIf="productos[k].tachado; then thenTemplate; else elseTemplate"></p>
-        <ng-template #thenTemplate>  
-            <p text-right>
-            <del><h2>{{productos[k].nombre}}</h2></del>                          
-            <del>{{productos[k].marca | uppercase}}</del>            
-            
-            <ion-note item-end>
-              En el carrito
-            </ion-note>
-            </p>
-        </ng-template>
+        <!--   <ion-icon name="rose" item-start></ion-icon> -->
 
-        <ng-template #elseTemplate>
-            <h2>{{productos[k].nombre}}</h2>            
-            {{ productos[k].marca | uppercase }}
-            <ion-note item-end>
-              Cantidad: {{ productos[k].cantidad }}
-            </ion-note>  
-        </ng-template>  
-        
-         
-   
-      </button>  
+          <!-- <ion-avatar item-start>
+            <img src="/assets/imgs/LogoNombre.png">
+          </ion-avatar> -->
 
-      <div *ngIf="loading" 
-        class="alert alert-warning" role="alert">
-        <strong>Cargando tu lista</strong> por favor espera
-      </div>
+          <p *ngIf="productos[k].tachado; then thenTemplate; else elseTemplate"></p>
+            <ng-template #thenTemplate>  
+                <p text-right>
+                <del><h2>{{productos[k].nombre}} {{productos[k].marca | uppercase}}</h2></del>                          
+                
+                <ion-note item-end>
+                  En el carrito
+                </ion-note>
+                </p>
+            </ng-template>
 
-
-      <div *ngIf="(productos | keys).length === 0 && !loading"
-              class="alert alert-info" role="alert">
-              <strong>No hay productos</strong> añade el primero!
-      </div>
+            <ng-template #elseTemplate>
+                <h2>{{productos[k].nombre}} {{ productos[k].marca | uppercase }}</h2>            
+              
+                <ion-note item-end>
+                  Cantidad: {{ productos[k].cantidad }}                                                   
+                </ion-note>  
+            </ng-template>     
     
- 
-</ion-list>
+        </button>  
 
+        <div *ngIf="loading" 
+          class="alert alert-warning" role="alert">
+          <strong>Cargando tu lista</strong> por favor espera
+        </div>
+
+        <div *ngIf="(productos | keys).length === 0 && !loading"
+                class="alert alert-info" role="alert">
+                <strong>No hay productos</strong> añade el primero!
+        </div>
+  </ion-list>
 
   <ion-fab bottom right>
     <button (click)="apuntarProducto()" ion-fab>
       <ion-icon name="add"></ion-icon>
     </button>
-  </ion-fab>
-
- 
+  </ion-fab> 
 
 </ion-content>
 

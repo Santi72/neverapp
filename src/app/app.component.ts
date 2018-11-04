@@ -28,9 +28,9 @@ export class MyApp {
     if (authProvider.authenticated) {
       this.rootPage = HomePage;
     } else {     
-      this.rootPage = HomePage;
- // Prov =SigninPage
+      this.rootPage = SigninPage;
     }
+    //this.rootPage = HomePage; //PROV
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
