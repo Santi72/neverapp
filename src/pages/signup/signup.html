@@ -9,17 +9,49 @@
     <ion-list>
       <ion-item>
         <ion-label stacked>Correo electrónico</ion-label>
-        <ion-input [(ngModel)]="userModel.email" type="text" autocorrect="off" autocapitalize="none" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-          required></ion-input>
+        <ion-input [(ngModel)]="userModel.email" name="email" type="text" autocorrect="off" autocapitalize="none" 
+          name="email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
+          required
+          #email="ngModel">
+        </ion-input>        
       </ion-item>
+      <div *ngIf="email.errors?.required" padding-left>
+        <p class="p_min">El correo electrónico es requerido</p>
+      </div>
+      <div *ngIf="email.errors?.pattern" padding-left>
+        <p>Debe ser un formato de correo válido</p>
+      </div>
 
       <ion-item>
         <ion-label stacked>Contraseña</ion-label>
-        <ion-input [(ngModel)]="userModel.password" type="password" name="password" required minlength="6"></ion-input>
+        <ion-input  [(ngModel)]="userModel.password" type="password" name="password" 
+          required 
+          minlength="6"
+          #contrasenia="ngModel">
+        </ion-input>
       </ion-item>
+      <div *ngIf="contrasenia.errors?.required" padding-left>
+        <p class="p_min">La contraseña es requerida</p>
+      </div>
+      <div *ngIf="contrasenia.errors?.minlength" padding-left>
+        <p class="p_min">6 caracteres mínimo</p>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>Repetir Contraseña</ion-label>
+        <ion-input [(ngModel)]="rpassword" type="password" name="rpassword" 
+          required 
+          minlength="6"
+          #rcontrasenia="ngModel">
+        </ion-input>       
+      </ion-item>   
+      
+      <div *ngIf="userModel.password != rpassword" padding-left>
+        <p class="p_min">Las contraseñas no coinciden</p>
+      </div>        
 
       <div padding-left padding-right padding-top>
-        <button ion-button [disabled]="!signUpForm.form.valid" block round>Registrar</button>
+        <button ion-button [disabled]="!signUpForm.form.valid ||  userModel.password != rpassword" block round>Registrar</button>
       </div>
     </ion-list>
   </form>

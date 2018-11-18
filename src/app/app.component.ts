@@ -4,11 +4,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AuthProvider } from '../providers/auth/auth';
+import { ListaProvider } from '../providers/lista/lista';
 
 import { SigninPage } from '../pages/signin/signin';
 import { HomePage } from '../pages/home/home';
 
 import { Observable } from "rxjs/Observable";
+
 
 @Component({
   templateUrl: 'app.html'
@@ -22,24 +24,28 @@ export class MyApp {
               statusBar: StatusBar,
               splashScreen: SplashScreen,
               authProvider: AuthProvider,
+              listaProvider: ListaProvider            
               ) {
+        
 
 
-    if (authProvider.authenticated) {
-      this.rootPage = HomePage;
-    } else {     
-      this.rootPage = SigninPage;
-    }
-    //this.rootPage = HomePage; //PROV
+          if (authProvider.authenticated) {
+            this.rootPage = HomePage;
+          } else {     
+            this.rootPage = SigninPage;
+          }
+          //this.rootPage = HomePage; //PROV
 
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
+          platform.ready().then(() => {
 
-
+            listaProvider.cargarStorage();
+            
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            statusBar.styleDefault();
+            splashScreen.hide();
+          });
   }
+
 }
 

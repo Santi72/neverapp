@@ -9,7 +9,6 @@ import { UserModel } from '../../models/user-model';
 
 import { Platform } from "ionic-angular";
 
-
 @Injectable()
 export class ListaProvider {
 
@@ -19,8 +18,6 @@ export class ListaProvider {
 
   userModel :UserModel; 
   productoModel: ProductoModel; 
-
- 
 
   public productosLista: any[] = [];
 
@@ -55,7 +52,6 @@ export class ListaProvider {
     //return "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_email + this.lc_pass+"/";
     return "https://neverapp-c21a5.firebaseio.com/LC" + this.lc_uid + "/";
   }
-
 
 
   //FireBase POST Lista
@@ -132,7 +128,6 @@ export class ListaProvider {
   }
 
 
-
   //FB GET Listado
   getListado(userModel: UserModel){
     
@@ -174,7 +169,7 @@ export class ListaProvider {
         console.log("Dispositivo - inicializa storage");
         this.storage.ready()
           .then(() => {
-            console.log("storage listo");
+            
             this.storage.get("nomlista")
               .then(usermodel_loc => {
 
@@ -184,6 +179,10 @@ export class ListaProvider {
 
                 resolve();
               });
+            console.log("Storage listo - userModel: " + this.userModel); 
+          })
+          .catch( ()=>{
+            console.log("Storage NO listo");
           })
       } else {
         //Escritorio

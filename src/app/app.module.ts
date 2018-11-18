@@ -48,7 +48,8 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp,{
-      backButtonText: ''
+      backButtonText: '',
+      navExitApp: false
     }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,

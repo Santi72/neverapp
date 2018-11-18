@@ -6,7 +6,7 @@ import { ProductoPage } from '../index.paginas';
 import { ListaProvider } from '../../providers/lista/lista';
 import { UserModel } from '../../models/user-model';
 import { ProductoModel } from '../../models/producto-model';
-import { get } from '@ionic-native/core';
+import { Platform } from 'ionic-angular';
 
 
 @Component({
@@ -25,43 +25,49 @@ export class HomePage {
               public authProvider: AuthProvider,
               public listaProv: ListaProvider,
               private menuCtrl: MenuController,
-              private alertCtrl: AlertController
-              ) {
-    
-
-            
+              private alertCtrl: AlertController,
+              platform: Platform
+              ) {    
+                
+         /*      platform.registerBackButtonAction(() => {
+              console.log("backPressed 1");
+              //this.navCtrl.pop();
+              //navCtrl.popAll();
+              navCtrl.popAll();
+              }, 1);   */
   }
 
   ionViewWillEnter(){
-    this.verLista();  
-    
+    this.verLista();     
   }
 
   mostrarMenu(){
     this.menuCtrl.toggle();
   }
 
-
-
   verLista(){
+    this.loading = true;
    
     this.listaProv.cargarStorage().then(() => {
       this.listaProv.getListado(this.listaProv.userModel)        
         .subscribe(data => {
-          //console.log(data);
-
+          
+          //console.log("Antes de tardar: "+data);
           //setTimeout(() => {      // el loading es en caso de conexiones lentas. settimeOut para simularlo
 
-          this.productos = data;
+          this.productos = data;          
+
+          //}, 4000)  
+          //console.log("Después de tardar: " + this.productos);
+
           this.loading = false;
 
-          // }, 4000)  
-
         });
+    }).catch( () =>{
+      console.log("No puedo Cargar Storage!! " );
     });
 
     this.menuCtrl.close();
-
 
   }
 
@@ -130,11 +136,9 @@ export class HomePage {
         
       }
 
-
   }
 
   limpiarLista(){
-
    
     const confirm = this.alertCtrl.create({
       title: 'Limpiar Lista',
@@ -185,9 +189,6 @@ export class HomePage {
 
     this.menuCtrl.close();
   
-
   }
-
-
 
 }

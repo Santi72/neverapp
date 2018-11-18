@@ -21,6 +21,8 @@ export class AuthProvider {
 
 
   get authenticated():boolean{
+    console.log("User:: "+this.user);
+    this.UsuarioActual();
     return this.user != null;
   }
 
@@ -34,7 +36,7 @@ export class AuthProvider {
     } else {
       // No user is signed in.
       console.log("Sin Current user! ");
-
+      return null;
     }
     return user.uid;
   }

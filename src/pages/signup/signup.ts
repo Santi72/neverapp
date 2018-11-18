@@ -68,7 +68,7 @@ export class SignupPage {
       loading.dismiss();
       
       console.log(error);
-      this.alert('Error', 'Error inesperado. Intentelo de nuevo');
+      this.alert('Error', 'El correo ya existe. Intentalo de nuevo');
     })
   }
   
