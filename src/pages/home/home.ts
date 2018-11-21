@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, AlertController, ModalController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { SigninPage } from '../signin/signin';
 import { ProductoPage } from '../index.paginas';
 import { ListaProvider } from '../../providers/lista/lista';
 import { UserModel } from '../../models/user-model';
 import { ProductoModel } from '../../models/producto-model';
+import { ModalPage } from "../modal/modal";
 
 import { ToastController } from 'ionic-angular';
+
 
 
 @Component({
@@ -27,7 +29,8 @@ export class HomePage {
               public listaProv: ListaProvider,
               private menuCtrl: MenuController,
               private alertCtrl: AlertController,
-              private toastCtrl: ToastController
+              private toastCtrl: ToastController,
+              public modalCtrl: ModalController
               ) {                   
 
   }
@@ -196,11 +199,19 @@ export class HomePage {
 
   toastDescribeApp(){
   const toast = this.toastCtrl.create({
-    message: "v1.0.0 basic",
-    duration: 2500,
+    message: "NEVERApp - apunta, comparte, compra - v1.0.0 básica",
+    duration: 3000,
     position: "top"
   });
   toast.present();
-}
+  }
+
+  abreAyuda(){
+    let profileModal = this.modalCtrl.create( ModalPage );
+    profileModal.present();
+
+  }
+
+
 
 }

@@ -25,6 +25,7 @@ import { KeysPipe } from '../pipes/keys/keys';
 
 //Plugins
 import { IonicStorageModule } from '@ionic/storage';
+import { ModalPage } from '../pages/modal/modal';
 
 
 export const firebaseConfig = {
@@ -43,7 +44,8 @@ export const firebaseConfig = {
     SignupPage,
     SigninPage,
     ProductoPage,
-    KeysPipe    
+    KeysPipe ,
+    ModalPage   
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ export const firebaseConfig = {
     HomePage,
     SignupPage,
     SigninPage,
-    ProductoPage
+    ProductoPage,
+    ModalPage
   ],
   providers: [
     StatusBar,
