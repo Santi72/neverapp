@@ -16,8 +16,8 @@
 
 <ion-menu class="na_parrafos-font" [content]="content" type="overlay">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menú</ion-title>
+    <ion-toolbar color=primary>
+      <ion-title (click)="toastDescribeApp()">NEVERApp</ion-title>      
     </ion-toolbar>  
   </ion-header>
 
@@ -29,8 +29,12 @@
       <button ion-item (click)="limpiarLista()">
         Limpiar Lista        
       </button>
-      <button ion-item color=primary (click)="signOut()">
-        Cerrar Lista (sesión)
+<!--       <button ion-item (click)="toastDescribePremium()" class="p_sec">
+        <h5>Acceder a la versión Premium</h5>
+      </button> -->
+      <button ion-item      
+          (click)="signOut()">
+        Salir
       </button>
     </ion-list>
   </ion-content>

@@ -6,7 +6,8 @@ import { ProductoPage } from '../index.paginas';
 import { ListaProvider } from '../../providers/lista/lista';
 import { UserModel } from '../../models/user-model';
 import { ProductoModel } from '../../models/producto-model';
-import { Platform } from 'ionic-angular';
+
+import { ToastController } from 'ionic-angular';
 
 
 @Component({
@@ -26,15 +27,9 @@ export class HomePage {
               public listaProv: ListaProvider,
               private menuCtrl: MenuController,
               private alertCtrl: AlertController,
-              platform: Platform
-              ) {    
-                
-         /*      platform.registerBackButtonAction(() => {
-              console.log("backPressed 1");
-              //this.navCtrl.pop();
-              //navCtrl.popAll();
-              navCtrl.popAll();
-              }, 1);   */
+              private toastCtrl: ToastController
+              ) {                   
+
   }
 
   ionViewWillEnter(){
@@ -190,5 +185,22 @@ export class HomePage {
     this.menuCtrl.close();
   
   }
+
+  toastDescribePremium(){
+    const toast = this.toastCtrl.create({
+      message: "Versión con recetas de cocina, mas tipos de lista, compartir experiencias y un montón de cosas más",
+      duration: 3500
+    });
+    toast.present();  
+  }
+
+  toastDescribeApp(){
+  const toast = this.toastCtrl.create({
+    message: "v1.0.0 basic",
+    duration: 2500,
+    position: "top"
+  });
+  toast.present();
+}
 
 }
