@@ -199,7 +199,7 @@ export class HomePage {
 
   toastDescribeApp(){
   const toast = this.toastCtrl.create({
-    message: "NEVERApp - apunta, comparte, compra - v1.0.0 básica",
+    message: "NEVERApp - v1.0.0 básica",
     duration: 3000,
     position: "top"
   });

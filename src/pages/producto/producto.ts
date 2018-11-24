@@ -35,7 +35,7 @@ export class ProductoPage {
     this.listaProv.cargarStorage().then( () =>{     
       this.listaProv.nuevoProducto( this.producto)
         .subscribe(data => {
-          this.mostrarToastNuevoProducto(this.producto.nombre + " " + this.producto.marca +" en la lista. Toca sobre el producto para ponerlo en el carrito"); 
+          this.mostrarToastNuevoProducto(this.producto.nombre + " " + this.producto.marca +" añadido a la lista. "); 
 
           this.navCtrl.pop();
         });

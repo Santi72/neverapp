@@ -18,6 +18,7 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico');
 @import url('https://fonts.googleapis.com/css?family=Oxygen:700');
 
+
 .na-font{
     font-family: 'Pacifico', cursive;
 }
@@ -28,13 +29,24 @@
 }
 
 // Mensajes de control de formulario
-.p_min{
+.na_parrafos-font .p_min{
     font-size: 10px;
     color: crimson;
 }
 
 // Mensajes de control secundarios
-.p_sec{
+.na_parrafos-font .p_sec{
     font-size: 10px;
     color: #00CED1;
+}
+
+// Titulos
+.na_parrafos-font .p_tit{
+    font-weight: bold;
+    color: #00CED1;
+}
+
+.toast-container{
+    background-color: #00CED1;
+    font-weight: bold;
 }

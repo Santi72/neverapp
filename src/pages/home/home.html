@@ -12,8 +12,8 @@
       </ion-buttons>    
 
       <ion-buttons end>
-        <button ion-button icon-only (click)="abreAyuda()">
-          <ion-icon name="information-circle"></ion-icon>
+        <button ion-button icon-only (click)="verLista()">
+          <ion-icon name="refresh"></ion-icon>
         </button>
       </ion-buttons>
 
@@ -31,17 +31,20 @@
 
   <ion-content>
     <ion-list>
-      <button ion-item (click)="verLista()">
-        Actualizar Lista
+      <button ion-item (click)="abreAyuda()">
+        <ion-icon name="information-circle"></ion-icon>
+        Información
       </button>
       <button ion-item (click)="limpiarLista()">
+        <ion-icon name="trash"></ion-icon>
         Limpiar Lista        
       </button>
-<!--       <button ion-item (click)="toastDescribePremium()" class="p_sec">
-        <h5>Acceder a la versión Premium</h5>
+    <!--   <button ion-item (click)="toastDescribePremium()" class="p_sec">
+        <h5><ion-icon name="star"></ion-icon>
+        Acceder a Premium</h5>
       </button> -->
-      <button ion-item      
-          (click)="signOut()">
+      <button ion-item (click)="signOut()">
+        <ion-icon name="exit"></ion-icon>
         Salir
       </button>
     </ion-list>
