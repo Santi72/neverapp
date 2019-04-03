@@ -8,7 +8,8 @@
     "start": "ionic-app-scripts serve",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint"
+    "lint": "ionic-app-scripts lint",
+    "compodoc": "npx compodoc -p src/tsconfig.app.json"
   },
   "dependencies": {
     "@angular/animations": "5.2.11",
@@ -41,6 +42,7 @@
     "cordova-android": "~6.3.0"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.9",
     "@ionic/app-scripts": "3.2.0",
     "typescript": "~2.6.2"
   },
